@@ -1,0 +1,4 @@
+*.pyc
+/apep8.sh
+/.project
+/.pydevproject

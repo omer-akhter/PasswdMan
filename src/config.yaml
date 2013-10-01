@@ -1,0 +1,42 @@
+path_store: $APP/passwdman
+path_config: $APP/user_config.yaml
+
+ui_choices:
+  - cli
+  - qt
+  - sdl
+  - web
+
+ui: qt
+
+# days
+default_expire: 30
+
+charset_choices:
+  - __chars_lowercase__
+  - __chars_uppercase__
+  - __chars_letters__
+  - __chars_digits__
+  - __chars_punctuation__
+
+# list of:
+#   - charset_choices
+#   - any sequence of characters
+
+default_charset:
+  - __chars_letters__
+  - __chars_digits__
+  - __chars_punctuation__
+
+default_min:
+  __: 10
+  __chars_lowercase__: 1
+  __chars_uppercase__: 1
+  __chars_digits__: 1
+  __chars_punctuation__: 1
+
+default_max:
+  __: 10
+  __chars_punctuation__: 3
+
+logging: warn
