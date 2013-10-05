@@ -4,10 +4,11 @@ path_config: $APP/user_config.yaml
 ui_choices:
   - cli
   - qt
+  - qml
   - sdl
   - web
 
-ui: qt
+ui: qml
 
 # days
 default_expire: 30

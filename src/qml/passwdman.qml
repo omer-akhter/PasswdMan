@@ -44,7 +44,7 @@ ListView {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: { console.log(model.on_select); model.on_select() }
+                onClicked: { model.on_select() }
             }
 
             Column {
@@ -73,7 +73,8 @@ ListView {
                         font.italic: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-                        anchors.fill: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     MouseArea {
@@ -96,7 +97,8 @@ ListView {
                         font.italic: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-                        anchors.fill: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     MouseArea {
