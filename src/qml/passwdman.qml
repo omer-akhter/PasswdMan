@@ -26,7 +26,6 @@ ListView {
 
     delegate: Component {
         Rectangle {
-            id: rectangle1
             width: passwd_list.width
             height: Math.max(txt_title.implicitHeight,
                              col_btns.implicitHeight) + 6

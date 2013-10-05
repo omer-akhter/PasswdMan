@@ -10,7 +10,7 @@ import sys
 
 class App( app.App ):
     def run( self ):
-        logging.debug( 'Running qt UI' )
+        logging.debug( 'Running qml UI' )
 
         path_qml_base = ioutil.path_con( os.path.join( self._config_inst.path_app, 'qml' ) )
         path_qml_main = os.path.join( path_qml_base, 'passwdman.qml' )
