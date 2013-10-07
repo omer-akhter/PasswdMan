@@ -47,6 +47,10 @@ if __name__ == '__main__':
         format='%(levelno)s: %(message)s',
         level=logging.DEBUG )
     try:
+#        ef = logic.EncryptedFile( 'test', '1111' )
+#        test_data = 'this is a test data'
+#        ef.write( test_data )
+#        assert ef.read() == test_data
         main()
     except Exception as e:
         logging.error( 'Fatal Error, application will now exit' )

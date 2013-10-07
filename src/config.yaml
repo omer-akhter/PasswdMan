@@ -16,7 +16,6 @@ default_expire: 30
 charset_choices:
   - __chars_lowercase__
   - __chars_uppercase__
-  - __chars_letters__
   - __chars_digits__
   - __chars_punctuation__
 
@@ -25,7 +24,8 @@ charset_choices:
 #   - any sequence of characters
 
 default_charset:
-  - __chars_letters__
+  - __chars_lowercase__
+  - __chars_uppercase__
   - __chars_digits__
   - __chars_punctuation__
 
