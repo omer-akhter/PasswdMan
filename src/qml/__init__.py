@@ -9,10 +9,15 @@ import sys
 
 
 class App( app.App ):
+
+    def init_ui(self):
+        pass
+
     def run( self ):
         logging.debug( 'Running qml UI' )
 
-        path_qml_base = ioutil.path_con( os.path.join( self._config_inst.path_app, 'qml' ) )
+        path_qml_base = ioutil.path_con(
+            os.path.join( self._config_inst.path_app, 'qml' ) )
         path_qml_main = os.path.join( path_qml_base, 'passwdman.qml' )
 
         qtapp = QtGui.QApplication( ['PasswdMan'] )
@@ -20,15 +25,15 @@ class App( app.App ):
         qtview = QtDeclarative.QDeclarativeView()
         qtglw = QtOpenGL.QGLWidget()
         qtview.setViewport( qtglw )
-        qtview.setResizeMode( QtDeclarative.QDeclarativeView.SizeRootObjectToView )
+        qtview.setResizeMode(
+            QtDeclarative.QDeclarativeView.SizeRootObjectToView )
 
         passwd_model = QtPasswdModel( [QtPasswdItem( {c: '%s%02d' % ( c, i )
-            for c in QtPasswdItem.COLUMNS } ) for i in xrange( 1 )] )
+                                                      for c in QtPasswdItem.COLUMNS } ) for i in xrange( 1 )] )
 
         qtrc = qtview.rootContext()
         qtrc.setContextProperty( 'passwd_model', passwd_model )
-        #qtrc.setContextProperty( 'passwd_callbacks', QtPasswdItem )
-
+        # qtrc.setContextProperty( 'passwd_callbacks', QtPasswdItem )
 
         qtview.setSource( path_qml_main )
         qtwindow.setCentralWidget( qtview )
@@ -40,6 +45,7 @@ class QtPasswdItem( QtCore.QObject ):
     COLUMNS = ( 'title', 'passwd', 'expiry' )
     CALLBACKS = ( 'on_select', )
     ALL = COLUMNS + CALLBACKS
+
     def __init__( self, passwd_inst ):
         QtCore.QObject.__init__( self )
         self._passwd_inst = passwd_inst

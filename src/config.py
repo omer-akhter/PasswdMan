@@ -7,7 +7,7 @@ import yaml
 import extra
 
 
-USER_CONF_KEYS = frozenset( ( 
+USER_CONF_KEYS = frozenset( (
     'ui',
     'logging',
     'path_store',
@@ -15,7 +15,7 @@ USER_CONF_KEYS = frozenset( (
     'default_charset',
     'default_min',
     'default_max',
- ) )
+) )
 
 CHARSET_CHOICES = {}
 
@@ -87,7 +87,7 @@ class Config( extra.MarkupDictObject ):
         except Exception:
             charset_id_ = charset_id.lstrip( '__chars_' ).rstrip( '__' )
             try:
-                CHARSET_CHOICES[charset_id] = set( 
+                CHARSET_CHOICES[charset_id] = set(
                     getattr( string, charset_id_ ) )
             except Exception:
                 if not ( charset_id in self.charset_choices and charset_id.startswith( '__chars_' ) and charset_id.endswith( '__' ) ):
@@ -101,7 +101,7 @@ class Config( extra.MarkupDictObject ):
         try:
             return self.__charset
         except Exception:
-            self.__charset = reduce( 
+            self.__charset = reduce(
                 lambda x,
                 y: x | y,
                 ( self.charset_resolve( c ) for c in self.default_charset ) )

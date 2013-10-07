@@ -3,6 +3,7 @@ Created on Oct 5, 2013
 
 @author: omera
 '''
+import logging
 import os
 
 from Crypto import Random
@@ -24,14 +25,20 @@ class PasswdMan( object ):
 
     def __init__( self, config_inst ):
         self._config_inst = config_inst
+        self._data_raw = None
 
-    def set_key( self, key ):
+    def is_new_store( self ):
+        return not ( os.path.isfile( self._config_inst.path_store ) )
+
+    def read( self, callback, key ):
         # if not key or len( key ) < 8:
         #    raise Exception( 'Key needs to be at least 8 characters long' )
-        self._key = key
-
-    def new_store( self ):
-        return not ( os.path.isfile( self._config_inst.path_store ) )
+        logging.debug(
+            'Loading store file: %s ',
+            self._config_inst.path_store )
+        self._store_file_e = EncryptedFile( self._config_inst.path_store, key )
+        if not self.is_new_store():
+            self._data_raw = self._store_file_e.read()
 
     def load_all( self, callback, *attr_list ):
         pass
@@ -40,8 +47,8 @@ class PasswdMan( object ):
 class EncryptedFile( object ):
 
     def __init__( self, file_path, key ):
-        if not key or len( key ) < 8:
-            raise Exception( 'Key needs to be at least 8 characters long' )
+        # if not key or len( key ) < 8:
+        #    raise Exception( 'Key needs to be at least 8 characters long' )
         self._file_path = file_path
         self._key = PBKDF2( key, os.urandom( 32 ), dkLen=32, count=5000 )
 
