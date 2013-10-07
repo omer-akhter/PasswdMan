@@ -63,15 +63,15 @@ class App( app.App ):
         self._btn_copy.rowconfigure( 2, weight=0 )
 
         row_ += 1
-        self._btn_show = ttk.Button(
+        self._btn_show_hide = ttk.Button(
             self._root,
             text='Show',
             command=self.on_show )
-        self._btn_show.grid(
+        self._btn_show_hide.grid(
             column=col_,
             row=row_,
             sticky=tk.NSEW )
-        self._btn_show.rowconfigure( 2, weight=0 )
+        self._btn_show_hide.rowconfigure( 2, weight=0 )
 
         row_ += 1
         self._btn_change = ttk.Button(
@@ -185,6 +185,7 @@ class App( app.App ):
 
     def clear_fields( self ):
         self._txt_show.config( show='*' )
+        self._btn_show_hide.config( text='Show' )
         self._txt_show_var.set( '' )
         self._lbl_expires_var.set( '' )
 
@@ -251,16 +252,20 @@ class App( app.App ):
         return False
 
     def on_copy( self, *args ):
-        selection = self._lst_passwds.curselection()
-        print 'on_copy: %d' % selection
+        selection = self.selection
+        if selection:
+            self._root.clipboard_clear()
+            self._root.clipboard_append( selection['passwd'] )
 
     def on_show( self, *args ):
         selection = self.selection
         if selection:
             if self._txt_show.config()['show'][-1] == '*':
                 self._txt_show.config( show='' )
+                self._btn_show_hide.config( text='Hide' )
             else:
                 self._txt_show.config( show='*' )
+                self._btn_show_hide.config( text='Show' )
         else:
             self._txt_show.config( show='*' )
 
@@ -343,7 +348,7 @@ class TkEditPasswdDlg( tk.Toplevel ):
             f: kwargs.pop(
                 '_' +
                 f ) if (
-            '_' +
+                    '_' +
                     f ) in kwargs else None for f in self.data_fields }
         if cnf is None:
             cnf = {}
